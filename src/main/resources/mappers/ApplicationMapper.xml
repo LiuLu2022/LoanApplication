@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ApplicationMapper" >
+    <resultMap id="BaseResultMap" type="pojo.ApplicationMapper" >
+        <constructor >
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="customer_ssn" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="loan_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+            <arg column="equity_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+            <arg column="salary_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, customer_ssn, full_name, loan_amount, equity_amount, salary_amount, create_time, update_time
+    </sql>
+
+    <insert id="insert" parameterType="pojo.ApplicationMapper" >
+        insert into loan_application (id, customer_ssn, full_name, loan_amount, equity_amount, salary_amount, create_time, update_time)
+        values (#{id,jdbcType=INTEGER}, #{customer_ssn,jdbcType=INTEGER}, #{full_name,jdbcType=VARCHAR},
+        #{loan_amount,jdbcType=DECIMAL}, #{equity_amount,jdbcType=DECIMAL}, #{salary_amount,jdbcType=DECIMAL}, now(), now())
+    </insert>
+
+    <select id="selectApplication" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List" />
+        from loan_application
+    </select>
+
+</mapper>
