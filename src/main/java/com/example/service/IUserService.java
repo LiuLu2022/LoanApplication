@@ -1,7 +1,7 @@
-package service;
+package com.example.service;
 
-import common.ServerResponse;
-import pojo.User;
+import com.example.common.ServerResponse;
+import com.example.pojo.User;
 
 public interface IUserService {
     ServerResponse<User> login(String username, String password);

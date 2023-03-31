@@ -1,8 +1,10 @@
-package dao;
+package com.example.dao;
 
-import pojo.User;
+import com.example.pojo.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserMapper {
 
     int insert(User record);

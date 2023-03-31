@@ -1,4 +1,4 @@
-package common;
+package com.example.common;
 
 public enum ResponseCode {
     SUCCESS(0,"SUCCESS"),

@@ -1,15 +1,17 @@
-package service.impl;
+package com.example.service.impl;
 
-import common.Const;
-import common.ServerResponse;
-import dao.UserMapper;
+import com.example.common.Const;
+import com.example.common.ServerResponse;
+import com.example.dao.UserMapper;
+import com.example.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import pojo.User;
-import service.IUserService;
-import util.MD5Util;
+import com.example.pojo.User;
+import com.example.util.MD5Util;
 
 @Service("iUserService")
+@Component
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -18,17 +20,17 @@ public class UserServiceImpl implements IUserService {
         public ServerResponse<User> login(String username, String password) {
         int resultCount = userMapper.checkUsername(username);
         if(resultCount == 0 ){
-            return ServerResponse.createByErrorMessage("用户名不存在");
+            return ServerResponse.createByErrorMessage("The user name does not exist.");
         }
 
         String md5Password = MD5Util.MD5EncodeUtf8(password);
         User user  = userMapper.selectLogin(username,md5Password);
         if(user == null){
-            return ServerResponse.createByErrorMessage("密码错误");
+            return ServerResponse.createByErrorMessage("Wrong Password.");
         }
 
         user.setPassword(org.apache.commons.lang3.StringUtils.EMPTY);
-        return ServerResponse.createBySuccess("登录成功",user);
+        return ServerResponse.createBySuccess("Login successful!",user);
     }
 
 
@@ -42,39 +44,38 @@ public class UserServiceImpl implements IUserService {
         if(!validResponse.isSuccess()){
             return validResponse;
         }
-        user.setRole(Const.Role.ROLE_CUSTOMER);
-        //MD5加密
+        //MD5 encrypt
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
         int resultCount = userMapper.insert(user);
         if(resultCount == 0){
-            return ServerResponse.createByErrorMessage("注册失败");
+            return ServerResponse.createByErrorMessage("Register failed!");
         }
-        return ServerResponse.createBySuccessMessage("注册成功");
+        return ServerResponse.createBySuccessMessage("Register successful!");
     }
 
     public ServerResponse<String> checkValid(String str,String type){
         if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
-            //开始校验
+            //start to check
             if(Const.USERNAME.equals(type)){
                 int resultCount = userMapper.checkUsername(str);
                 if(resultCount > 0 ){
-                    return ServerResponse.createByErrorMessage("用户名已存在");
+                    return ServerResponse.createByErrorMessage("The user name is already existed.");
                 }
             }
             if(Const.EMAIL.equals(type)){
                 int resultCount = userMapper.checkEmail(str);
                 if(resultCount > 0 ){
-                    return ServerResponse.createByErrorMessage("email已存在");
+                    return ServerResponse.createByErrorMessage("The email is already existed.");
                 }
             }
         }else{
-            return ServerResponse.createByErrorMessage("参数错误");
+            return ServerResponse.createByErrorMessage("Wrong parameter.");
         }
-        return ServerResponse.createBySuccessMessage("校验成功");
+        return ServerResponse.createBySuccessMessage("Check successful.");
     }
 
     public ServerResponse checkAdminRole(User user){
-        if(user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
+        if(user != null && user.getRole().equals("adviser")){
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();

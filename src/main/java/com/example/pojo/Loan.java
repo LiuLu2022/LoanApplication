@@ -1,12 +1,12 @@
-package pojo;
+package com.example.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Application {
+public class Loan {
     private Integer id;
 
-    private Integer customerSsn;
+    private String customerSsn;
 
     private String fullName;
 
@@ -20,6 +20,21 @@ public class Application {
 
     private Date updateTime;
 
+    public Loan(Integer id, String customerSsn, String fullName, BigDecimal loanAmount, BigDecimal equityAmount, BigDecimal salaryAmount, Date createTime, Date updateTime) {
+        this.id = id;
+        this.customerSsn = customerSsn;
+        this.fullName = fullName;
+        this.loanAmount = loanAmount;
+        this.equityAmount = equityAmount;
+        this.salaryAmount = salaryAmount;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public Loan() {
+        super();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -28,11 +43,11 @@ public class Application {
         this.id = id;
     }
 
-    public Integer getCustomerSsn() {
+    public String getCustomerSsn() {
         return customerSsn;
     }
 
-    public void setCustomerSsn(Integer customerSsn) {
+    public void setCustomerSsn(String customerSsn) {
         this.customerSsn = customerSsn;
     }
 

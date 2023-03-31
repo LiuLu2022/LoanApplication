@@ -1,12 +1,14 @@
-package controller;
+package com.example.controller;
 
-import common.Const;
-import common.ServerResponse;
+import com.example.common.Const;
+import com.example.common.ResponseCode;
+import com.example.common.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import pojo.User;
-import service.IUserService;
+import com.example.pojo.User;
+import com.example.service.IUserService;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username,password);
@@ -33,21 +35,24 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "logout.do",method = RequestMethod.POST)
+    @RequestMapping(value = "logout",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
 
-    @RequestMapping(value = "register.do",method = RequestMethod.POST)
+    @RequestMapping(value = "register",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> register(User user){
+        if(StringUtils.isEmpty(user.getUsername())||StringUtils.isEmpty(user.getPassword())||StringUtils.isEmpty(user.getEmail())||StringUtils.isEmpty(user.getRole())){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),"username,password,email,role are necessary fields.");
+        }
         return iUserService.register(user);
     }
 
 
-    @RequestMapping(value = "check_valid.do",method = RequestMethod.POST)
+    @RequestMapping(value = "check_valid",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkValid(String str,String type){
         return iUserService.checkValid(str,type);

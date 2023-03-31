@@ -1,4 +1,4 @@
-package util;
+package com.example.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -18,12 +18,12 @@ public class PropertiesUtil {
     private static Properties props;
 
     static {
-        String fileName = "mmall.properties";
+        String fileName = "loan.properties";
         props = new Properties();
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
         } catch (IOException e) {
-            logger.error("配置文件读取异常",e);
+            logger.error("Exception with reading configuration file.",e);
         }
     }
 
