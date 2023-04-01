@@ -1,8 +1,8 @@
 package com.example.service;
 
+import com.example.pojo.Loan;
 import com.github.pagehelper.PageInfo;
 import com.example.common.ServerResponse;
-import com.example.pojo.Loan;
 
 public interface ILoanService {
 

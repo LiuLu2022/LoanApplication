@@ -13,8 +13,8 @@ public interface UserMapper {
 
     int checkEmail(String email);
 
-    int checkPassword(@Param(value="password")String password,@Param("userId")Integer userId);
+    int checkPassword(@Param(value = "password") String password, @Param("userId") Integer userId);
 
-    User selectLogin(@Param("username") String username, @Param("password")String password);
+    User selectLogin(@Param("username") String username, @Param("password") String password);
 }
 

@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.dao.LoanMapper" >
-    <resultMap id="BaseResultMap" type="com.example.pojo.Loan" >
-        <constructor >
-            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="customer_ssn" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-            <arg column="loan_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-            <arg column="equity_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-            <arg column="salary_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+<mapper namespace="com.example.dao.LoanMapper">
+    <resultMap id="BaseResultMap" type="com.example.pojo.Loan">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="customer_ssn" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="full_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="loan_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="equity_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="salary_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         </constructor>
     </resultMap>
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         id, customer_ssn, full_name, loan_amount, equity_amount, salary_amount, create_time, update_time
     </sql>
 
-    <insert id="insert" parameterType="com.example.dao.LoanMapper" >
-        insert into loan_application (id, customer_ssn, full_name, loan_amount, equity_amount, salary_amount, create_time, update_time)
+    <insert id="insert" parameterType="com.example.dao.LoanMapper">
+        insert into loan_application (id, customer_ssn, full_name, loan_amount, equity_amount, salary_amount,
+        create_time, update_time)
         values (#{id,jdbcType=INTEGER}, #{customerSsn,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR},
-        #{loanAmount,jdbcType=DECIMAL}, #{equityAmount,jdbcType=DECIMAL}, #{salaryAmount,jdbcType=DECIMAL}, now(), now())
+        #{loanAmount,jdbcType=DECIMAL}, #{equityAmount,jdbcType=DECIMAL}, #{salaryAmount,jdbcType=DECIMAL}, now(),
+        now())
     </insert>
 
     <select id="selectApplication" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from loan_application
     </select>
 

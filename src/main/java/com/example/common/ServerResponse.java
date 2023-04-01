@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by lu
  */
 @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
-//保证序列化json的时候,如果是null的对象,key也会消失
+//Ensure that when serializing json, if it is a null object, the key will also disappear
 public class ServerResponse<T> implements Serializable {
 
     private int status;
@@ -36,7 +36,7 @@ public class ServerResponse<T> implements Serializable {
     }
 
     @JsonIgnore
-    //使之不在json序列化结果当中
+    //Keep it out of the json serialization result
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.getCode();
     }
