@@ -18,11 +18,13 @@ Step 1. Install Idea, Java 8, maven, Mysql 8, git
 
 Step 2. Git clone code to your working folder
 
-Step 3. Install all the maven denpendency
+Step 3. Run the creating table SQL in Mysql database.
 
-Step 4. Modify the "application.propertise" file, set the database connection information as your own.
+Step 4. Install all the maven denpendency
 
-Step 5. Run the application
+Step 5. Modify the "application.propertise" file, set the database connection information as your own.
+
+Step 6. Run the application
 
 How to do the test:
 Find the "test" folder, all the unit test is in the folder, run the unit test methods.
