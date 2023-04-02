@@ -10,7 +10,7 @@ Implementation of authentication and authorization mechanisms：
 
 There are register, login and logout functions in this application to ensure that only authorized users can access the API, and only adviser role can view all the applications, and only customers can apply for loan.
 
-MD5 encyption is adopted in ensuring the security of user password and Token cache is used to store the user information, when a cutomer does a loan application, customer user name is taken from session as the customer_ssn for application.
+MD5 encryption is adopted in ensuring the security of user password and Token cache is used to store the user information, when a customer does a loan application, customer user name is taken from session as the customer_ssn for application.
 
 How to deploy and run the application:
 
