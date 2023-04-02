@@ -4,7 +4,7 @@ Description: This is a Spring boot project with simplified solution for customer
 
 Technology:Java 8, Spring boot, Maven
 
-Database: Mysql
+Database: Mysql 8
 
 Implementation of authentication and authorization mechanisms：
 
