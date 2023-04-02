@@ -57,11 +57,22 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCheckAdminRole() {
+    public void testCheckAdviserRole() {
         User user = new User();
         user.setRole("adviser");
 
-        ServerResponse response = userService.checkAdminRole(user);
+        ServerResponse response = userService.checkAdviserRole(user);
+
+        assertNotNull(response);
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void testCheckCustomerRole() {
+        User user = new User();
+        user.setRole("customer");
+
+        ServerResponse response = userService.checkCustomerRole(user);
 
         assertNotNull(response);
         assertTrue(response.isSuccess());

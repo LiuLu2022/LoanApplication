@@ -72,8 +72,15 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccessMessage("Check successful.");
     }
 
-    public ServerResponse checkAdminRole(User user) {
+    public ServerResponse checkAdviserRole(User user) {
         if (user != null && user.getRole().equals("adviser")) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
+    }
+
+    public ServerResponse checkCustomerRole(User user) {
+        if (user != null && user.getRole().equals("customer")) {
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();

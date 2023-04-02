@@ -10,5 +10,7 @@ public interface IUserService {
 
     ServerResponse<String> checkValid(String str, String type);
 
-    ServerResponse checkAdminRole(User user);
+    ServerResponse checkAdviserRole(User user);
+
+    ServerResponse checkCustomerRole(User user);
 }

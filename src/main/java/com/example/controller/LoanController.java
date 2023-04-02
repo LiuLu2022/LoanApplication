@@ -35,11 +35,16 @@ public class LoanController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "User didn't login, please login first.");
         }
-        if (StringUtils.isEmpty(loan.getFullName()) || StringUtils.isEmpty(loan.getLoanAmount())) {
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), "fullName,loanAmount are necessary fields.");
+        if (iUserService.checkCustomerRole(user).isSuccess()) {
+
+            if (StringUtils.isEmpty(loan.getFullName()) || StringUtils.isEmpty(loan.getLoanAmount())) {
+                return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), "fullName,loanAmount are necessary fields.");
+            }
+            loan.setCustomerSsn(user.getUsername()); //set CustomerSsn as username which is from session
+            return iLoanService.addApplication(loan);
+        } else {
+            return ServerResponse.createByErrorMessage("No permission,this function is for customer");
         }
-        loan.setCustomerSsn(user.getUsername()); //set CustomerSsn as username which is from session
-        return iLoanService.addApplication(loan);
     }
 
     @RequestMapping(value = "getApplicationList", method = RequestMethod.POST)
@@ -49,7 +54,7 @@ public class LoanController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "User didn't login, please login first.");
         }
-        if (iUserService.checkAdminRole(user).isSuccess()) {
+        if (iUserService.checkAdviserRole(user).isSuccess()) {
             return iLoanService.getApplicationList(pageNum, pageSize);
         } else {
             return ServerResponse.createByErrorMessage("No permission,this function is for adviser");
